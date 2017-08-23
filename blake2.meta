@@ -1,0 +1,6 @@
+((synopsis        "BLAKE2 hashing algorithm")
+ (files           "blake2.scm" "blake2.meta" "blake2.setup")
+ (author          "LemonBoy")
+ (license         "GPL-3")
+ (depends         message-digest)
+ (category        crypt))

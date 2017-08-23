@@ -1,0 +1,7 @@
+(compile -s -j blake2 -O3 -d0 "blake2.scm")
+(compile -s "blake2.import.scm")
+
+(install-extension
+  'blake2
+  '("blake2.so" "blake2.import.so")
+'((version "0.1")))
