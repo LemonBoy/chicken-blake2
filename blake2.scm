@@ -7,8 +7,6 @@
 
 #>
 #include "ref/blake2.h"
-#include "ref/blake2b-ref.c"
-#include "ref/blake2s-ref.c"
 <#
 
 (define-syntax define-impl
