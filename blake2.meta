@@ -2,6 +2,6 @@
  (files           "blake2.scm" "blake2.meta" "blake2.setup" "ref/blake2.h"
                   "ref/blake2-impl.h" "ref/blake2b-ref.c" "ref/blake2s-ref.c")
  (author          "LemonBoy")
- (license         "GPL-3")
+ (license         "MIT")
  (depends         message-digest)
  (category        crypt))
