@@ -5,9 +5,11 @@
 (use message-digest-primitive)
 (import-for-syntax chicken)
 
-(foreign-declare "#include \"ref/blake2.h\"")
-(foreign-declare "#include \"ref/blake2b-ref.c\"")
-(foreign-declare "#include \"ref/blake2s-ref.c\"")
+#>
+#include "ref/blake2.h"
+#include "ref/blake2b-ref.c"
+#include "ref/blake2s-ref.c"
+<#
 
 (define-syntax define-impl
   (er-macro-transformer
