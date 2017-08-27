@@ -4,4 +4,5 @@
  (author          "LemonBoy")
  (license         "MIT")
  (depends         (message-digest "3.5.0"))
+ (test-depends    test)
  (category        crypt))
