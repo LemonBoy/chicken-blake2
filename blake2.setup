@@ -4,4 +4,4 @@
 (install-extension
   'blake2
   '("blake2.so" "blake2.import.so")
-'((version "0.0.2")))
+'((version "0.0.3")))
