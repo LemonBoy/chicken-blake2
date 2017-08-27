@@ -42,7 +42,9 @@
                ; block size
                ,block-size
                ; name
-               ',(symbol-append name '-primitive))))))))
+               ',(symbol-append name '-primitive)
+               ; raw-update
+               (foreign-lambda int ,update c-pointer c-pointer size_t))))))))
 
 (define-impl blake2s
   blake2s_init blake2s_init_key blake2s_update blake2s_final
