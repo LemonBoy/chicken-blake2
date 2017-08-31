@@ -1,6 +1,4 @@
 ((synopsis        "BLAKE2 hashing algorithm")
- (files           "blake2.scm" "blake2.meta" "blake2.setup" "ref/blake2.h"
-                  "ref/blake2-impl.h" "ref/blake2b-ref.c" "ref/blake2s-ref.c")
  (author          "LemonBoy")
  (license         "MIT")
  (depends         (message-digest "3.5.0"))

@@ -1,7 +1,15 @@
-(compile -s -j blake2 -O3 -d0 "blake2.scm" "ref/blake2b-ref.c" "ref/blake2s-ref.c")
+; compile in the faster implementation on x86/x64
+(define impl-files
+  (cond-expand
+    ((or x86 x86-64)
+     '("sse/blake2b.c" "sse/blake2s.c"))
+    (else
+     '("ref/blake2b-ref.c" "ref/blake2s-ref.c"))))
+
+(compile -s -j blake2 -O3 -d0 "blake2.scm" ,@impl-files)
 (compile -s "blake2.import.scm")
 
 (install-extension
   'blake2
   '("blake2.so" "blake2.import.so")
-'((version "0.0.4")))
+'((version "0.0.5")))
