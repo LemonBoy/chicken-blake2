@@ -1,9 +1,14 @@
 (module blake2
   (blake2s-primitive blake2b-primitive)
-  (import scheme chicken foreign)
 
-(use message-digest-primitive)
-(import-for-syntax chicken)
+  (cond-expand
+    (chicken-4
+     (import scheme chicken foreign)
+     (use message-digest-primitive)
+     (import-for-syntax chicken))
+    (chicken-5
+     (import scheme (chicken base) (chicken blob) (chicken foreign) message-digest-primitive))
+    (else (error "Unsupported chicken version.")))
 
 #>
 #include "ref/blake2.h"
@@ -44,12 +49,9 @@
                  ; finalize
                  (lambda (ctx out)
                    ((foreign-lambda int ,final-proc c-pointer scheme-pointer size_t) ctx out length))
-                 ; block size
-                 ,block-size
-                 ; name
-                 ',primitive-name
-                 ; raw-update
-                 (foreign-lambda int ,update-proc c-pointer c-pointer size_t)))))))))
+                 block-length: ,block-size
+                 name: ',primitive-name
+                 raw-update: (foreign-lambda int ,update-proc c-pointer c-pointer size_t)))))))))
 
 (define-impl blake2s
   (foreign-type-size "blake2s_state")
