@@ -1,0 +1,39 @@
+((synopsis        "BLAKE2 hashing algorithm")
+ (author          "LemonBoy")
+ (license         "MIT")
+ (dependencies message-digest-primitive)
+ (test-dependencies    message-digest modular-arithmetic srfi-4 srfi-42 test)
+ (category        crypt)
+ (components
+  (cond-expand
+    ((or x86 x86-64)
+     (c-object blake2b
+	       (source "sse/blake2b.c")
+	       (source-dependencies
+		"sse/blake2.h"
+		"sse/blake2-impl.h"
+		"sse/blake2-config.h"
+		"sse/blake2b-round.h"
+		"sse/blake2b-load-sse2.h"))
+     (c-object blake2s
+	       (source "sse/blake2s.c")
+	       (source-dependencies
+		"sse/blake2.h"
+		"sse/blake2-impl.h"
+		"sse/blake2-config.h"
+		"sse/blake2s-round.h"
+		"sse/blake2s-load-sse2.h")))
+    (else
+     (c-object blake2b
+	       (source "ref/blake2b-ref.c")
+	       (source-dependencies
+		"ref/blake2.h"
+		"ref/blake2-impl.h"))
+     (c-object blake2s
+	       (source "ref/blake2s-ref.c")
+	       (source-dependencies
+		"ref/blake2.h"
+		"ref/blake2-impl.h"))))
+  (extension blake2
+	     (objects blake2b blake2s)
+	     (source-dependencies "ref/blake2.h"))))
